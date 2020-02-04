@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :events, only: [:index,:create]
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
+  get '/current_user', to: 'users#show'
 end
