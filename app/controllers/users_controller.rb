@@ -32,6 +32,11 @@ class UsersController < ApplicationController
       end
 
     end
+
+    def events
+      user = User.find(params[:id])
+      render json:  user.events
+    end
      
     private
 
