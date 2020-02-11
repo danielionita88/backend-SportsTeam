@@ -13,6 +13,12 @@ class EventsController < ApplicationController
         end
     end
 
+    def destroy
+        event = Event.find(params[:id])
+        event.destroy()
+        render json: {message: 'event deleted successfully'}
+    end
+
     private
 
     def event_params
