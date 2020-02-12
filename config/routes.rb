@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   post '/login', to: 'users#login'
   get '/current_user', to: 'users#show'
   get '/users/:id/events', to: 'users#events'
-  
+  get 'users/search/:q', to: 'users#search'
 end

@@ -38,6 +38,13 @@ class UsersController < ApplicationController
       render json:  user.events
     end
      
+    def search
+        search = params[:q].split(' ')
+        users= User.all.where("first_name LIKE ? OR last_name LIKE ?", "%#{search[0]}%", "%#{search[1]}%")
+        render json: users
+    end
+
+
     private
 
     def user_params
