@@ -30,7 +30,6 @@ class UsersController < ApplicationController
       else 
           render json: {error: 'invalid token'}
       end
-
     end
 
     def events
@@ -42,6 +41,12 @@ class UsersController < ApplicationController
         search = params[:q].split(' ')
         users= User.all.where("first_name LIKE ? OR last_name LIKE ?", "%#{search[0]}%", "%#{search[1]}%")
         render json: users
+    end
+
+    def friend_requests
+      user = User.find(params[:id])
+      requestors = user.requests.map{|req| User.find(req.requestor_id)}
+      render json: requestors
     end
 
 
