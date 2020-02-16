@@ -8,7 +8,7 @@ class User < ApplicationRecord
     has_many :pending_friends, foreign_key: :requestor_id, class_name: 'FriendRequest'
 
     has_many :friendships, dependent: :destroy
-    has_many :friends,through: :friendships
+    has_many :friends,through: :friendships, source: :user
 
     validates :first_name, presence: true
     validates :last_name, presence: true

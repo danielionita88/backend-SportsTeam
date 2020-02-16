@@ -1,18 +1,19 @@
 class Friendship < ApplicationRecord
-  # after_create :create_inverse_relationship
-  after_destroy :destroy_inverse_relationship
 
-  belongs_to :user
-  belongs_to :friend, class_name: 'User'
+  belongs_to :user, foreign_key: :friend_id
 
-  private
-
-  # def create_inverse_relationship
-  #   friend.friendships.create(friend: user)
-  # end
-
-  def destroy_inverse_relationship
-    friendship = friend.friendships.find_by(friend: user)
-    friendship.destroy if friendship
+  after_create do |f|
+    
+    friendship = Friendship.find_by(friend_id: f.user_id)
+    if !friendship
+      Friendship.create!(user_id: f.friend_id, friend_id: f.user_id)
+    end
   end
+
+  after_destroy do |f|
+    reciprocal=Friendship.find_by(friend_id: f.user_id)
+    reciprocal.destroy unless reciprocal.nil?
+  end
+
+
 end
