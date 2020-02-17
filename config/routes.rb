@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/current_user', to: 'users#show'
   get '/users/:id/events', to: 'users#events'
   get 'users/:id/friend_requests', to: 'users#friend_requests'
+  get 'users/:id/friends', to: 'users#friends'
   get 'users/search/:q', to: 'users#search'
 end

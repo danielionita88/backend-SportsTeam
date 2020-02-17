@@ -49,6 +49,11 @@ class UsersController < ApplicationController
       render json: requestors
     end
 
+    def friends 
+      user = User.find(params[:id])
+      render json: user.friends
+    end
+
 
     private
 

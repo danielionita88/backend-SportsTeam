@@ -6,9 +6,10 @@ class FriendshipsController < ApplicationController
             new_friendship = Friendship.create(friendship_params)
             friend_request = FriendRequest.where(requestor_id: params[:friend_id], receiver_id: params[:user_id])
             friend_request.delete_all
-            render json: new_friendship
+            friend=User.find(params[:friend_id])
+            render json: friend
         else
-            render json: {message: 'already a friend'}
+            render json: {error: 'already a friend'}
         end
     end
 
