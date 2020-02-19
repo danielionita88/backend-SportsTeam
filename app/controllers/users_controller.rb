@@ -39,7 +39,12 @@ class UsersController < ApplicationController
      
     def search
         search = params[:q].split(' ')
-        users= User.all.where("first_name LIKE ? OR last_name LIKE ?", "%#{search[0]}%", "%#{search[1]}%")
+        if search[1].blank?
+          # byebug
+          users= User.where("LOWER(first_name) LIKE :search OR LOWER(last_name) LIKE :search", search: "%#{search[0]}%")
+        else 
+          users=User.where("LOWER(first_name) LIKE :search OR LOWER(last_name) LIKE :search OR LOWER(first_name) LIKE :search1 OR LOWER(last_name) LIKE :search1", search:"%#{search[0]}%", search1: "%#{search[1]}%")
+        end
         render json: users
     end
 
