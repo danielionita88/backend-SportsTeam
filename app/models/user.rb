@@ -14,4 +14,11 @@ class User < ApplicationRecord
     validates :last_name, presence: true
     validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, uniqueness: true
     
+
+    def self.search(query)
+        User.all.select do |user|
+          user.first_name.downcase.include?(query) ||
+          user.last_name.downcase.include?(query) 
+        end
+    end
 end
