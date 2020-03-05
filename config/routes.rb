@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :friend_requests, only: [:create, :destroy]
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: [:create]
   resources :users, only: [:create]
   resources :events, only: [:index, :create, :update, :destroy]
   post '/signup', to: 'users#create'
@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get 'users/:id/friend_requests', to: 'users#friend_requests'
   get 'users/:id/friends', to: 'users#friends'
   get 'users/search/:q', to: 'users#search'
+  delete '/friendships/:user_id/:friend_id', to: 'friendships#delete'
 end

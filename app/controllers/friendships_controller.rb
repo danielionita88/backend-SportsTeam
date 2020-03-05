@@ -13,6 +13,12 @@ class FriendshipsController < ApplicationController
         end
     end
 
+    def delete
+        friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
+        friendship.destroy
+        render json: {message: 'friendship deleted'}
+    end
+
     private
 
     def friendship_params
