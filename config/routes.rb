@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id/events', to: 'users#events'
   get 'users/:id/friend_requests', to: 'users#friend_requests'
   get 'users/:id/friends', to: 'users#friends'
+  get 'users/:id/friends_events', to: 'users#friends_events'
   get 'users/search/:q', to: 'users#search'
   delete '/friendships/:user_id/:friend_id', to: 'friendships#delete'
 end

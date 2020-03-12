@@ -21,4 +21,6 @@ class User < ApplicationRecord
           user.last_name.downcase.include?(query) 
         end
     end
+
+    
 end
