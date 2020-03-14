@@ -34,6 +34,8 @@ class UsersController < ApplicationController
 
   def events
     user = User.find(params[:id])
+    puts '================================='
+    puts user.events
     render json:  user.events
   end
     
@@ -53,17 +55,16 @@ class UsersController < ApplicationController
     render json: requestors
   end
 
+  def pending_friends
+    user= User.find(params[:id])
+    pending_friends = user.pending_friends.map{|req| User.find(req.receiver_id)}
+    render json: pending_friends
+  end
+
   def friends 
     user = User.find(params[:id])
     render json: user.friends
   end
-
-  def friends_events
-    user=User.find(params[:id])
-    friends_events= user.friends.map{|friend| friend.events}
-    render json: friends_events
-  end
-
 
   private
   
