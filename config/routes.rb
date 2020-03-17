@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :friend_requests, only: [:create, :destroy]
   resources :friendships, only: [:create]
   resources :users, only: [:create]
+  resources :user_events, only: [:create]
   resources :events, only: [:index, :create, :update, :destroy]
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
